@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Sha256HashProvider {
+public class Sha256HashProvider implements HashProvider {
 
+    @Override
     public String hash(String text) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

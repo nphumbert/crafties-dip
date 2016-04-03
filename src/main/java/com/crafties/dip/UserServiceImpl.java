@@ -2,10 +2,10 @@ package com.crafties.dip;
 
 public class UserServiceImpl implements UserService {
 
-    private final Sha256HashProvider hashProvider;
+    private final HashProvider hashProvider;
 
-    public UserServiceImpl() {
-        hashProvider = new Sha256HashProvider();
+    public UserServiceImpl(HashProvider hashProvider) {
+        this.hashProvider = hashProvider;
     }
 
     @Override

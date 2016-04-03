@@ -4,20 +4,24 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class UserServiceImplTest {
 
     @Test
     public void should_create_user_with_hashed_password() {
         // given
-        UserService userService = new UserServiceImpl();
+        HashProvider hashProvider = mock(HashProvider.class);
+        when(hashProvider.hash("secret")).thenReturn("hash");
+        UserService userService = new UserServiceImpl(hashProvider);
 
         // when
         User user = userService.createUser("Bob", "secret");
 
         // then
         assertThat(user.firstName(), is("Bob"));
-        assertThat(user.hashedPassword(), is("K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols="));
+        assertThat(user.hashedPassword(), is("hash"));
     }
 
 }
